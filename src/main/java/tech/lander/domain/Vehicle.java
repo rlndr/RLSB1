@@ -1,18 +1,14 @@
 package tech.lander.domain;
 
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@ApiModel(description="Details of the vehicle entity.")
+@Schema(description = "Details of the vehicle entity.")
 @Document(collection = "vehicle")
 public class Vehicle {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private String make;
     private String plate;

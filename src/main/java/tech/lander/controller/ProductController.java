@@ -1,7 +1,7 @@
 package tech.lander.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/")
-@Api(value="productapi", description = "Operations pertaining to the Product test api.")
+@Tag(name = "productapi", description = "Operations pertaining to the Product test api.")
 public class ProductController {
 
     @Autowired
@@ -27,26 +27,26 @@ public class ProductController {
     @Autowired
     private ProductRepoNew productRepoNew;
 
-    @ApiOperation(value = "Fetch all Products", notes = "Returns all products without condition")
+    @Operation(summary = "Fetch all Products", description = "Returns all products without condition")
     @RequestMapping(value = "products", method = RequestMethod.GET)
     public List<Product> listAllProducts() {
         return productRepoNew.findAll();
     }
 
-    @ApiOperation(value = "Fetch by description", notes = "Returns products where the Product Name matches the entered string.")
+    @Operation(summary = "Fetch by description", description = "Returns products where the Product Name matches the entered string.")
     @RequestMapping(value = "products/desc", method = RequestMethod.GET)
     public List<Product> listByDesc(@RequestParam String desc) {
 //        return productRepoNew.findByDescription(desc);
         return productRepository.findByProductName(desc);
     }
 
-    @ApiOperation(value = "Fetch by status", notes = "Returns products where the Product status matches the entered string.")
+    @Operation(summary = "Fetch by status", description = "Returns products where the Product status matches the entered string.")
     @RequestMapping(value = "products/status", method = RequestMethod.GET)
     public List<Product> listByStatus(@RequestParam String status) {
         return productRepoNew.findByStatus(status);
     }
 
-    @ApiOperation(value = "Add Product", notes = "Creates a new Product.")
+    @Operation(summary = "Add Product", description = "Creates a new Product.")
     @RequestMapping(value = "products", method = RequestMethod.POST)
     ResponseEntity<?> addProduct(@RequestBody Product product, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -62,7 +62,7 @@ public class ProductController {
         }
     }
 
-    @ApiOperation(value = "Fetch Product by ID", notes = "Returns a Product for the given ID.")
+    @Operation(summary = "Fetch Product by ID", description = "Returns a Product for the given ID.")
     @RequestMapping(value = "products/{id}", method = RequestMethod.GET)
     public Product  getById(@PathVariable String id) {
         Optional<Product> foundProduct = productRepoNew.findById(id);
@@ -70,21 +70,18 @@ public class ProductController {
         //TODO Add try catch
     }
 
-    @ApiOperation(value = "Update a product", notes = "Update a product entity.")
+    @Operation(summary = "Update a product", description = "Update a product entity.")
     @RequestMapping(value = "products/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateProduct(@RequestBody Product product){
         try {
             productRepoNew.save(product);
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.add("content-type", "application/json");
-//            return new ResponseEntity<String>(" Saved", headers, HttpStatus.OK);
             return new ResponseEntity<String>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>(HttpStatus.EXPECTATION_FAILED);
         }
     }
 
-    @ApiOperation(value = "Delete a product", notes = "Delete the product for the given ID.")
+    @Operation(summary = "Delete a product", description = "Delete the product for the given ID.")
     @RequestMapping(value = "products/{id}", method = RequestMethod.DELETE)
     public String deleteProduct(@PathVariable String id) {
         productRepository.deleteProduct(id);
