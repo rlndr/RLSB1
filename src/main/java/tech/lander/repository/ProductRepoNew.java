@@ -15,5 +15,5 @@ public interface ProductRepoNew extends MongoRepository<Product, String> {
 
     Optional<Product> findById(String id);
 
-    void save(Product product);
+
 }

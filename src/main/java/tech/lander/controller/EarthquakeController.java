@@ -1,7 +1,7 @@
 package tech.lander.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.lander.constants.CommonConstant;
@@ -21,7 +21,7 @@ import java.util.Optional;
 @CrossOrigin(origins = {"http://localhost:63342", "http://192.168.0.17"})
 @RestController
 @RequestMapping(CommonConstant.URL_EQ_API)
-@Api(value="quakeapi", description = "Operations pertaining to the Earthquake API.")
+@Tag(name = "quakeapi", description = "Operations pertaining to the Earthquake API.")
 public class EarthquakeController {
 
     @Autowired
@@ -48,20 +48,20 @@ public class EarthquakeController {
         return "Earthquakes saved: " + quakeList.size();
     }
 
-    @ApiOperation(value = "Fetch all Earth Quake Groups", notes = "Groups of earthquakes are based on a date range and minimum magnatude.")
+    @Operation(summary = "Fetch all Earth Quake Groups", description = "Groups of earthquakes are based on a date range and minimum magnatude.")
     @RequestMapping(value = "quakegroup", method = RequestMethod.GET)
     public List<Qgroup> getAllQuakeGroups() {
         return eqGroupRepository.findAll();
     }
 
-//    @ApiOperation(value = "Fetch Earth Quake Group by ID", notes = "Returns an Earthquake group for the given ID.")
+//    @Operation(summary = "Fetch Earth Quake Group by ID", description = "Returns an Earthquake group for the given ID.")
 //    @RequestMapping(value = "quakegroup{id}", method = RequestMethod.GET)
 //    public Qgroup getQuakeGroupById(@PathVariable  String id) {
 //        Optional<Qgroup> foundQGroup = eqGroupRepository.findById(id);
 //        return foundQGroup.get();
 //    }
 
-    @ApiOperation(value = "Fetch all Earth Quakes by Group", notes = "Returns all Earthquakes for the given Group ID")
+    @Operation(summary = "Fetch all Earth Quakes by Group", description = "Returns all Earthquakes for the given Group ID")
     @RequestMapping(value = "quake/{groupObjectId}", method = RequestMethod.GET)
     public List<Quake> getQuakesByGroupId(@PathVariable String groupObjectId) {
         return eqRepository.findByGroupObjectId(groupObjectId);

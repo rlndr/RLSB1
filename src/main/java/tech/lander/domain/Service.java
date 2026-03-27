@@ -1,20 +1,17 @@
 package tech.lander.domain;
 
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Date;
 
-@ApiModel(description="This is an instsance of a maintenance performed")
+@Schema(description = "This is an instance of a maintenance performed")
 @Document(collection = "service")
 public class Service {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date serviceDate;
@@ -43,8 +40,4 @@ public class Service {
     public void setServiceMileage(int serviceMileage) {
         this.serviceMileage = serviceMileage;
     }
-
-
-
-
 }

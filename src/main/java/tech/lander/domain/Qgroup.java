@@ -1,9 +1,9 @@
 package tech.lander.domain;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.persistence.Id;
 import java.util.Date;
 
 /**

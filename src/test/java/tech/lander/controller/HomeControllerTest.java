@@ -1,21 +1,16 @@
 package tech.lander.controller;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 public class HomeControllerTest {
 
 	@Test
 	public void testApp(){
 		HomeController hc = new HomeController();
 		String result = hc.home();
-		assertEquals( result, "All your base are belong to us.");
+		assertEquals("All your base are belong to us.", result);
 	}
-
-
 
 }

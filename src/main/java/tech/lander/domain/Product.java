@@ -1,25 +1,20 @@
 package tech.lander.domain;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
-//@Entity
-@ApiModel(description="Details of the Product entity.")
+@Schema(description = "Details of the Product entity.")
 @Document(collection = "product")
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     private int productId;
@@ -27,7 +22,7 @@ public class Product {
     private String status;
     private String category;
 
-    @ApiModelProperty(notes="Name should have atleast 2 characters")
+    @Schema(description = "Name should have atleast 2 characters")
     @Size(min=2, message="Name should have atleast 2 characters")
     private String productName;
     private String imageUrl;
