@@ -4,9 +4,11 @@ import com.mongodb.MongoClientURI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.MongoDbFactory;
+//import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 import tech.lander.Util.DCUtil;
 
 
@@ -23,9 +25,9 @@ public class AppConfig {
     private String publicKeyLoc;
 
     @Bean
-    public MongoDbFactory mongoDbFactory() throws Exception {
+    public MongoDatabaseFactory mongoDbFactory() throws Exception {
 
-        return new SimpleMongoDbFactory(new MongoClientURI(getDecryptedMongoURL(mongoURL)));
+        return new SimpleMongoClientDatabaseFactory(new MongoClientURI(getDecryptedMongoURL(mongoURL)));
     }
 
     @Bean
