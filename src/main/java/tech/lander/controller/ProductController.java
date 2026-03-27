@@ -71,10 +71,13 @@ public class ProductController {
     }
 
     @ApiOperation(value = "Update a product", notes = "Update a product entity.")
-    @RequestMapping(value = "products", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "products/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateProduct(@RequestBody Product product){
         try {
             productRepoNew.save(product);
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.add("content-type", "application/json");
+//            return new ResponseEntity<String>(" Saved", headers, HttpStatus.OK);
             return new ResponseEntity<String>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>(HttpStatus.EXPECTATION_FAILED);

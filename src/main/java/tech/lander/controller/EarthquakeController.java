@@ -54,12 +54,12 @@ public class EarthquakeController {
         return eqGroupRepository.findAll();
     }
 
-    @ApiOperation(value = "Fetch Earth Quake Group by ID", notes = "Returns an Earthquake group for the given ID.")
-    @RequestMapping(value = "quakegroup{id}", method = RequestMethod.GET)
-    public Qgroup getQuakeGroupById(@PathVariable  String id) {
-        Optional<Qgroup> foundQGroup = eqGroupRepository.findById(id);
-        return foundQGroup.get();
-    }
+//    @ApiOperation(value = "Fetch Earth Quake Group by ID", notes = "Returns an Earthquake group for the given ID.")
+//    @RequestMapping(value = "quakegroup{id}", method = RequestMethod.GET)
+//    public Qgroup getQuakeGroupById(@PathVariable  String id) {
+//        Optional<Qgroup> foundQGroup = eqGroupRepository.findById(id);
+//        return foundQGroup.get();
+//    }
 
     @ApiOperation(value = "Fetch all Earth Quakes by Group", notes = "Returns all Earthquakes for the given Group ID")
     @RequestMapping(value = "quake/{groupObjectId}", method = RequestMethod.GET)
